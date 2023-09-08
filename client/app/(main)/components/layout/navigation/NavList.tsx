@@ -13,7 +13,7 @@ const NavList: React.FC<NavListProps> = ({className}) => {
         navName="구독"
         noItemsMessage="구독한 채널이 없습니다."
         items={[
-          [{name:'hello', href:'world'}],
+          [{name:'원신 채널', href:'/c/genshin'}],
           [{name:'iam', href:'student'}],
         ]}
       />

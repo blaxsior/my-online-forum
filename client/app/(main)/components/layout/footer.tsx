@@ -5,7 +5,7 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ children }) => {
   return (
-    <footer className="border-t-[1px] border-neutral-400 py-6 text-center">
+    <footer className="border-t-[1px] border-base-400 py-6 text-center">
       {children}
     </footer>
   );

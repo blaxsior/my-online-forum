@@ -1,5 +1,5 @@
-import NavBar from "../../components/navigation/nav-bar"
-import Footer from "./components/footer"
+import NavBar from "./components/layout/navigation/nav-bar"
+import Footer from "./components/layout/footer"
 
 // max-w-[1300x] + mx-auto를 통해 옆에 남는 공간 줄 수 있음.
 // grid + 옵션 통해 처리.
@@ -11,10 +11,12 @@ export default function MainLayout({
   return (
     <>
       <NavBar />
-      <div className="bg-stone-200 w-screen min-h-screen">
+      <div className="bg-stone-200 w-full min-h-screen">
         <div className="max-w-[1300px] mx-auto lg:grid lg:grid-cols-[13fr_3fr] gap-x-3">
-          {children}
-          <aside className="bg-white my-4 h-fit border-[1px] border-neutral-400 rounded-md hidden lg:block">
+          <div className="bg-white min-h-screen border-x-[1px] border-base-400">
+            {children}
+          </div>
+          <aside className="bg-white my-4 h-fit border-[1px] border-base-400 rounded-md hidden lg:block">
             world
           </aside>
         </div>
