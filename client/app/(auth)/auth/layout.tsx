@@ -1,5 +1,4 @@
 import MainLogo from "@/components/logo/MainLogo"
-import { Separator } from "@/components/ui/separator"
 
 export default function MainLayout({
   children,

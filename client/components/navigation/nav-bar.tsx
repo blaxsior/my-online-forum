@@ -6,7 +6,7 @@ import { UserCircle2 } from 'lucide-react';
 
 const NavBar = () => {
   return (
-    <nav className='text-white text-base font-semibold px-10 py-3 bg-slate-700 flex flex-row justify-between items-center'>
+    <nav className='text-white w-screen text-base font-semibold px-10 py-3 bg-slate-700 flex flex-row justify-between items-center'>
       <Link href='/' className='mr-6'>
         <MainIcon />
       </Link>
