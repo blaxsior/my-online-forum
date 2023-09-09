@@ -1,6 +1,6 @@
 import { CheckIcon, BellIcon } from 'lucide-react';
 import HeaderButton from './header-button';
-import ChanIcon from './chan-icon';
+import ChanIcon from '@/components/chan-icon';
 import ChanDescription, { ChanDescProps } from './chan-description';
 import SelectList from './select-list';
 import Link from 'next/link';
@@ -18,17 +18,19 @@ interface ChanHeaderProps {
   chan_url: string;
 }
 
-const ChannelHeader: React.FC<ChanHeaderProps> = ({chan_url: href}) => {
+const ChannelHeader: React.FC<ChanHeaderProps> = ({ chan_url }) => {
   return (
-    <header className='border-b-[1px] border-base-400'>
-      <div className='flex flex-row p-4 space-x-4 items-center '>
-        <Link href={href}>
+    <header>
+      <div className='flex flex-row p-4 space-x-4 items-center border-b-[1px] border-base-400'>
+        <Link href={chan_url}>
           <ChanIcon src='/slime.webp' />
         </Link>
         {/* header */}
         <div className='flex-grow'>
           <div className='flex flex-row items-center justify-between'>
-            <h1 className='font-medium text-lg'>원신 채널</h1>
+            <Link href={chan_url}>
+              <h1 className='font-medium text-lg'>원신 채널</h1>
+            </Link>
             <div className='space-x-1'>
               <HeaderButton>
                 <BellIcon className='w-4 h-4 inline-block' />
@@ -43,7 +45,6 @@ const ChannelHeader: React.FC<ChanHeaderProps> = ({chan_url: href}) => {
           <ChanDescription {...descInfo} />
         </div>
       </div>
-      <SelectList />
     </header >
   );
 }
