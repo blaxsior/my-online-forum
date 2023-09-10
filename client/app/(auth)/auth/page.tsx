@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import SigninForm from "./form/signin-form";
-import SignupForm from "./form/signup-form";
+import SigninForm from "./components/signin-form";
+import SignupForm from "./components/signup-form";
 import { Separator } from "@/components/ui/separator";
 
 const AuthPage = () => {
