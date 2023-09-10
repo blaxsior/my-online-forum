@@ -3,12 +3,11 @@ import ReactQuill from "react-quill";
 import dynamic from 'next/dynamic'; // react-quill이 document를 요구하기 때문에 필요.
 import 'react-quill/dist/quill.snow.css';
 import './section.css';
-import ToolBar from "./toolbar";
+// import ToolBar from "./toolbar";
 import { useState } from "react";
 
 // https://quilljs.com/docs/modules/
 // 따로 타입 없는듯?
-
 // var toolbarOptions = [
 //   ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
 //   ['blockquote', 'code-block'],
@@ -28,15 +27,28 @@ import { useState } from "react";
 
 //   ['clean']                                         // remove formatting button
 // ];
-
 const moduleOptions = {
-  toolbar: {
-    container: "#toolbar",
-  },
-}
-
+    toolbar: {
+      container: [
+        [{ 'header': [1, 2, 3, false] }],
+  
+  
+        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+        ['blockquote', 'code-block'],
+  
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'align': [] }],
+  
+      ],
+    },
+  }
+// 클라이언트 측에서 렌더링되도록 처리(document 요구)
 const Quill = dynamic(() => import('react-quill'),{ssr: false});
-
+const ToolBar = dynamic(()=> import('./toolbar'), {ssr: false});
+/**
+ * 글을 작성하는 영역. 툴바 + 에디팅 영역 포함됨.
+ */
 const WriteSection = () => {
   const [value, setValue] = useState('');
   const [wcount, setWCount] = useState(0);
@@ -48,16 +60,14 @@ const WriteSection = () => {
 
   return (
     <div className="m-4">
-      <ToolBar />
-      <div className="parent-scroll overflow-auto lg:h-[500px] sm:h-[400px] border-[1px] border-base-400">
-        <div id='scrolling-container'>
+      <div className="border-[1px] border-base-400">
           <Quill
+          theme="snow"
             value={value}
             onChange={onChange}
             modules={moduleOptions}
-            bounds="#scrolling-container"
-            scrollingContainer=".parent-scroll"/>
-        </div>
+            bounds=".ql-editor"
+            scrollingContainer=".ql-container"/>
       </div>
       <div>문자 개수: {wcount}</div>
     </div>
