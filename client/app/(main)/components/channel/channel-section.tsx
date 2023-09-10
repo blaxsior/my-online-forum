@@ -21,7 +21,7 @@ const ChannelSection: React.FC<ChannelSectionProps> = ({ title, href, post_lisks
       <ul>
         {
           (post_lisks && post_lisks.length > 0) ?
-            post_lisks.map((it) => <PostLink {...it} />)
+            post_lisks.map((it) => <PostLink {...it}  key={it.href}/>)
             :
             <div>글이 없습니다!</div>
         }

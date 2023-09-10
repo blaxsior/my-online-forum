@@ -1,9 +1,19 @@
-/* write section 용도. 스크롤 바로 동작! */
+/* article-title css 요소 조정. Quill 속성 변경 */
+
+/* 기본적으로 있는 border 지정. */
 .ql-container.ql-snow {
-  border-style: none !important; /* 기본적으로 있는 border 지정. */
-  height: 400px;
+  border-style: none !important; 
+  height:400px;
+  max-width:100%
 }
 
+.ql-toolbar {
+  border-width: 0px !important;
+  border-bottom: 2px solid #ccc !important;
+}
+/* 기본 폰트 사이즈 지정 */
 .ql-editor {
-  font-size: 16px; /* 기본 폰트 사이즈 지정 */
+  height:100%;
+  font-size: 16px; 
+  overflow-y: auto;
 }

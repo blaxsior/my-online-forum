@@ -3,6 +3,9 @@ import Footer from "./components/layout/footer"
 
 // max-w-[1300x] + mx-auto를 통해 옆에 남는 공간 줄 수 있음.
 // grid + 옵션 통해 처리.
+/**
+ * 글쓰기 등에 대응되는 메인 레이아웃
+ */
 export default function MainLayout({
   children,
 }: {
@@ -12,7 +15,7 @@ export default function MainLayout({
     <>
       <NavBar />
       <div className="bg-stone-200 w-full min-h-screen">
-        <div className="max-w-[1300px] mx-auto lg:grid lg:grid-cols-[13fr_3fr] gap-x-3">
+        <div className="max-w-[1300px] mx-auto grid lg:grid-cols-[13fr_3fr] gap-x-3">
           <div className="bg-white min-h-screen border-x-[1px] border-base-400">
             {children}
           </div>

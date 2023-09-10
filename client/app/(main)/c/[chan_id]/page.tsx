@@ -1,4 +1,3 @@
-import ChannelHeader from "./components/header/chan-header";
 import SelectList from "./components/header/select-list";
 
 interface ChannelPageProps {
