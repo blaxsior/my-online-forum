@@ -2,6 +2,8 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { User2Icon, LockIcon, MailIcon, FormInputIcon } from 'lucide-react';
+import * as z from 'zod';
 import {
   Form,
   FormControl,
@@ -11,14 +13,12 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import * as z from 'zod';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { User2Icon, LockIcon, MailIcon, FormInputIcon } from 'lucide-react';
 import { signinSchema } from './signin-form';
 
-const _signupSchema = z.object({
+const inSignupSchema = z.object({
   name: z
     .string({
       required_error: '닉네임은 필수 정보입니다.',
@@ -35,7 +35,7 @@ const _signupSchema = z.object({
   }),
 });
 // https://stackoverflow.com/questions/73695535/how-to-check-confirm-password-with-zod
-const signupSchema = _signupSchema
+const signupSchema = inSignupSchema
   .merge(signinSchema)
   .refine((data) => data.password === data.confirmPassword, {
     message: '비밀번호가 일치하지 않습니다.',

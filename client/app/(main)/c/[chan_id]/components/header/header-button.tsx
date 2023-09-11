@@ -13,6 +13,7 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({
 }) => {
   return (
     <button
+      type="button"
       className={cn(
         'text-xs border-2 p-[5px] hover:bg-slate-300 space-x-1',
         className,

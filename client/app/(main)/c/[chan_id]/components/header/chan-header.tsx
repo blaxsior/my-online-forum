@@ -1,9 +1,8 @@
 import { CheckIcon, BellIcon } from 'lucide-react';
-import ChanIcon from '@/components/chan-icon';
 import Link from 'next/link';
+import ChanIcon from '@/components/chan-icon';
 import HeaderButton from './header-button';
 import ChanDescription, { ChanDescProps } from './chan-description';
-import SelectList from './select-list';
 
 const descInfo: ChanDescProps = {
   admin: {

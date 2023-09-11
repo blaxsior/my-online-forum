@@ -30,7 +30,7 @@ const HeaderSelect: React.FC<HeaderSelectProps> = ({
     if (value) {
       setOption(value);
     }
-  }, []);
+  }, [query, searchParams]);
 
   const changeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setOption(e.target.value);

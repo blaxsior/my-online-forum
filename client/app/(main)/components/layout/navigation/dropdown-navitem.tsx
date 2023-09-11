@@ -1,11 +1,3 @@
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuItem,
-//   DropdownMenuSeparator,
-//   DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu"
-
 'use client';
 
 import { Dropdown, type CustomFlowbiteTheme } from 'flowbite-react';
@@ -33,7 +25,7 @@ const DropdownNavItem: React.FC<DropDownNavItemProps> = ({
   const menuItems = items.map((group, idx) => {
     // as={Link}가 공식문서에서는 가능하다고 하는데, 에러 메시지 보여줌
     const list = group.map((it) => (
-      <Dropdown.Item>
+      <Dropdown.Item key={it.href}>
         <Link href={it.href}>{it.name}</Link>
       </Dropdown.Item>
     ));

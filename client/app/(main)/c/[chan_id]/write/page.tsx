@@ -3,16 +3,16 @@
 import 'react-quill/dist/quill.snow.css';
 import './components/section.css';
 
-import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import * as z from 'zod';
 
 import { UnprivilegedEditor } from 'react-quill';
 import dynamic from 'next/dynamic';
-import Spinner from '@/components/spinner';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
+import Spinner from '@/components/spinner';
+import { Button } from '@/components/ui/button';
 import { moduleOptions } from './components/quill.config';
 
 interface WritePageProps {
@@ -50,8 +50,8 @@ export default function WritePage({ params }: WritePageProps) {
 
   function onQuillDataChange(
     v: string,
-    _1: any,
-    _2: any,
+    _1: never,
+    _2: never,
     editor: UnprivilegedEditor,
   ) {
     form.setValue('content', v);

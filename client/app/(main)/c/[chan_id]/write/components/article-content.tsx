@@ -40,7 +40,12 @@ const ReactQuill = dynamic(() => import('react-quill'), {
 function ArticleContent() {
   const [content, setContent] = useState('');
   const [wcount, setWCount] = useState(0);
-  function onChange(v: string, _1: any, _2: any, editor: UnprivilegedEditor) {
+  function onChange(
+    v: string,
+    _1: never,
+    _2: never,
+    editor: UnprivilegedEditor,
+  ) {
     setContent(v);
     setWCount(editor.getLength() - 1); // 항상 개행 포함
   }

@@ -1,5 +1,9 @@
 'use client';
 
+import { useState } from 'react';
+import { MailIcon } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,
   FormControl,
@@ -14,17 +18,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 
-import { MailIcon } from 'lucide-react';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-
-import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  RecoverPwDataType,
-  recoverPWSchema,
-  recover_password,
-} from '@/actions/auth/recover-password';
+import { recover_password } from '@/actions/auth/recover-password';
 import { useToast } from '@/components/ui/use-toast';
+import { RecoverPwDataType, recoverPWSchema } from '@/schema/auth';
 
 function RecoverPasswordPage() {
   const [opened, setOpen] = useState(false);

@@ -3,9 +3,9 @@
 import { FileTextIcon, StarIcon, PenBoxIcon } from 'lucide-react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useCallback } from 'react';
+import Link from 'next/link';
 import { addAndGetQueryString } from '@/lib/params';
 
-import Link from 'next/link';
 import HeaderButton from './header-button';
 import HeaderSelect from './header-select';
 
@@ -26,12 +26,12 @@ function SelectList() {
       const queryString = addAndGetQueryString(searchParams, [{ name, value }]);
       return `${pathname}?${queryString}`;
     },
-    [addAndGetQueryString, searchParams],
+    [pathname, searchParams],
   );
 
   const queryHandler = (name: string, value: string) => {
-    const url_string = getUrl(name, value);
-    router.push(url_string); // 쿼리에 따라 다른 글 가져오는 동작 필요
+    const urlString = getUrl(name, value);
+    router.push(urlString); // 쿼리에 따라 다른 글 가져오는 동작 필요
   };
 
   return (

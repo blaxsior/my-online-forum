@@ -1,5 +1,5 @@
-import MainIcon from '@/components/icons/main-icon';
 import Link from 'next/link';
+import MainIcon from '@/components/icons/main-icon';
 import NavList from './NavList';
 import UserMenu from './user-menu';
 
