@@ -1,9 +1,9 @@
-import MainLogo from "@/components/logo/MainLogo"
+import MainLogo from '@/components/logo/MainLogo';
 
 export default function MainLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <div className="w-screen min-h-screen bg-gray-300 flex items-center justify-center py-10">
@@ -12,5 +12,5 @@ export default function MainLayout({
         {children}
       </main>
     </div>
-  )
+  );
 }

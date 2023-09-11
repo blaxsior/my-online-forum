@@ -1,5 +1,5 @@
-import NavBar from "./components/layout/navigation/nav-bar"
-import Footer from "./components/layout/footer"
+import NavBar from './components/layout/navigation/nav-bar';
+import Footer from './components/layout/footer';
 
 // max-w-[1300x] + mx-auto를 통해 옆에 남는 공간 줄 수 있음.
 // grid + 옵션 통해 처리.
@@ -9,7 +9,7 @@ import Footer from "./components/layout/footer"
 export default function MainLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <>
@@ -27,8 +27,11 @@ export default function MainLayout({
       <Footer>
         <p>created by blaxsior</p>
         <p>2023.09.07 ~ </p>
-        <p>※ 이 사이트는 토이 프로젝트로, 수익을 창출하지 않는 공부 목적으로 제작됩니다.</p>
+        <p>
+          ※ 이 사이트는 토이 프로젝트로, 수익을 창출하지 않는 공부 목적으로
+          제작됩니다.
+        </p>
       </Footer>
     </>
-  )
+  );
 }

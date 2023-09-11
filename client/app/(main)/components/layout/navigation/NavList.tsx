@@ -1,21 +1,20 @@
-
-import React from "react";
-import { cn } from "@/lib/utils";
-import DropdownNavItem from "./dropdown-navitem";
+import React from 'react';
+import { cn } from '@/lib/utils';
+import DropdownNavItem from './dropdown-navitem';
 
 interface NavListProps {
   className?: string;
 }
 
-const NavList: React.FC<NavListProps> = ({className}) => {
+const NavList: React.FC<NavListProps> = ({ className }) => {
   return (
     <ul className={cn('flex flex-row gap-2', className)}>
       <DropdownNavItem
         navName="구독"
         noItemsMessage="구독한 채널이 없습니다."
         items={[
-          [{name:'원신 채널', href:'/c/genshin'}],
-          [{name:'iam', href:'student'}],
+          [{ name: '원신 채널', href: '/c/genshin' }],
+          [{ name: 'iam', href: 'student' }],
         ]}
       />
       <DropdownNavItem
@@ -24,6 +23,6 @@ const NavList: React.FC<NavListProps> = ({className}) => {
       />
     </ul>
   );
-}
+};
 
 export default NavList;

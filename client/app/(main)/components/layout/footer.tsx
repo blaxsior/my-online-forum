@@ -1,4 +1,3 @@
-
 interface FooterProps {
   children?: React.ReactNode;
 }
@@ -9,6 +8,6 @@ const Footer: React.FC<FooterProps> = ({ children }) => {
       {children}
     </footer>
   );
-}
+};
 
 export default Footer;
