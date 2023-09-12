@@ -6,7 +6,7 @@ import Footer from './components/layout/footer';
 /**
  * 글쓰기 등에 대응되는 메인 레이아웃
  */
-export default function MainLayout({
+export default async function MainLayout({
   children,
 }: {
   children: React.ReactNode;

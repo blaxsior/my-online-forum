@@ -3,7 +3,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { User2Icon, LockIcon } from 'lucide-react';
-import * as z from 'zod';
 import {
   Form,
   FormControl,
@@ -15,26 +14,14 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-
-// signup에서 merge해서 사용됨
-export const signinSchema = z.object({
-  login_id: z
-    .string({
-      required_error: '아이디는 필수 정보입니다.',
-    })
-    .min(5, '아이디는 최소 5자리입니다.')
-    .max(20, '아이디는 최대 20자리입니다.'),
-  password: z
-    .string({
-      required_error: '비밀번호는 필수 정보입니다.',
-    })
-    .min(8, '비밀번호는 최소 8자리입니다.')
-    .max(12, '비밀번호는 최대 12자리입니다.'),
-});
-
-export type SignInDataType = z.infer<typeof signinSchema>;
+import { signIn } from 'next-auth/react';
+import { SignInDataType, signinSchema } from '@/schema/auth/signin';
+import { useToast } from '@/components/ui/use-toast';
+import { useRouter } from 'next/navigation';
 
 function SigninForm() {
+  const router = useRouter();
+  const { toast } = useToast();
   const form = useForm<SignInDataType>({
     resolver: zodResolver(signinSchema),
     defaultValues: {
@@ -45,8 +32,26 @@ function SigninForm() {
 
   const { isSubmitting } = form.formState;
 
-  const onSubmit = (data: SignInDataType) => {
-    console.log(data);
+  const onSubmit = async (data: SignInDataType) => {
+    try {
+      const response = await signIn('credentials', {
+        redirect: false,
+        login_id: data.login_id,
+        password: data.password,
+      });
+      // console.log(response);
+      if (response?.error) {
+        console.log(response);
+        toast({
+          variant: 'destructive',
+          title: response.error,
+        });
+        return;
+      }
+      router.push('/');
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

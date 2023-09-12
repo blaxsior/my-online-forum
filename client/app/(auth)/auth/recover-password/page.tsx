@@ -20,11 +20,14 @@ import { Separator } from '@/components/ui/separator';
 
 import { recover_password } from '@/actions/auth/recover-password';
 import { useToast } from '@/components/ui/use-toast';
-import { RecoverPwDataType, recoverPWSchema } from '@/schema/auth';
+import {
+  RecoverPwDataType,
+  recoverPWSchema,
+} from '@/schema/auth/recover-password';
 
 function RecoverPasswordPage() {
   const [opened, setOpen] = useState(false);
-  const toast = useToast();
+  const { toast } = useToast();
 
   const form = useForm<RecoverPwDataType>({
     resolver: zodResolver(recoverPWSchema),
@@ -37,11 +40,17 @@ function RecoverPasswordPage() {
 
   const onSubmit = async (data: RecoverPwDataType) => {
     const result = await recover_password(data);
-    if (!result.success)
-      toast.toast({
+    if (result.success) {
+      toast({
         variant: 'destructive',
-        // title
+        title: '메일 전송에 실패했습니다',
       });
+      return;
+    }
+    form.reset({
+      email: '',
+    });
+    setOpen(true);
   };
 
   return (

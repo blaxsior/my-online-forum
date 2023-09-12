@@ -2,8 +2,10 @@ import Link from 'next/link';
 import MainIcon from '@/components/icons/main-icon';
 import NavList from './NavList';
 import UserMenu from './user-menu';
+// import { getServerSession } from 'next-auth';
 
-function NavBar() {
+async function NavBar() {
+  // const session = await getServerSession();
   return (
     <nav className="text-white w-100% text-base font-semibold px-10 py-3 bg-slate-700 flex flex-row justify-between items-center">
       <Link href="/" className="mr-6">

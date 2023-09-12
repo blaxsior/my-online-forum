@@ -3,7 +3,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { User2Icon, LockIcon, MailIcon, FormInputIcon } from 'lucide-react';
-import * as z from 'zod';
 import {
   Form,
   FormControl,
@@ -16,35 +15,15 @@ import {
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { signinSchema } from './signin-form';
+import { SignUpDataType, signupSchema } from '@/schema/auth/signup';
+import { signupAction } from '@/actions/auth/signup';
+import { useToast } from '@/components/ui/use-toast';
+import { useRouter } from 'next/navigation';
 
-const inSignupSchema = z.object({
-  name: z
-    .string({
-      required_error: '닉네임은 필수 정보입니다.',
-    })
-    .min(2, '닉네임은 2글자 이상이어야 합니다.')
-    .max(20, '닉네임은 20글자 이하여야 합니다.'),
-  email: z
-    .string({
-      required_error: '이메일은 필수 정보입니다.',
-    })
-    .email('이메일 구조가 맞지 않습니다.'),
-  confirmPassword: z.string({
-    required_error: '비밀번호를 확인해주세요',
-  }),
-});
 // https://stackoverflow.com/questions/73695535/how-to-check-confirm-password-with-zod
-const signupSchema = inSignupSchema
-  .merge(signinSchema)
-  .refine((data) => data.password === data.confirmPassword, {
-    message: '비밀번호가 일치하지 않습니다.',
-    path: ['confirmPassword'], // 여기로 에러 발생
-  });
-
-export type SignUpDataType = z.infer<typeof signupSchema>;
-
 function SignupForm() {
+  const { toast } = useToast();
+  const router = useRouter(); // redirect 사용시 에러 발생
   const form = useForm<SignUpDataType>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
@@ -57,8 +36,26 @@ function SignupForm() {
   });
   const { isSubmitting } = form.formState;
 
-  const onSubmit = (data: SignUpDataType) => {
-    console.log(data);
+  const onSubmit = async (data: SignUpDataType) => {
+    const result = await signupAction(data);
+
+    if (result.error) {
+      toast({
+        variant: 'destructive',
+        title: result.message,
+      });
+      return;
+    }
+
+    form.reset({
+      confirmPassword: '',
+      email: '',
+      login_id: '',
+      name: '',
+      password: '',
+    });
+
+    return router.replace('/');
   };
 
   return (
@@ -173,7 +170,7 @@ function SignupForm() {
                 </FormControl>
               </div>
               <FormDescription>
-                비밀번호는 8 ~ 12자리 사이입니다.
+                비밀번호는 8 ~ 20자리 사이입니다.
               </FormDescription>
               <FormMessage />
             </FormItem>
