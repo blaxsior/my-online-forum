@@ -10,7 +10,7 @@ interface ChanLayoutProps {
 export default function ChanLayout({ params, children }: ChanLayoutProps) {
   return (
     <div>
-      <ChannelHeader chan_url={`/c/${params.chan_id}`} />
+      <ChannelHeader chan_id={params.chan_id} />
       {children}
     </div>
   );

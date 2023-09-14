@@ -2,6 +2,25 @@ import { AUTH_SECRET, SERVER } from '@/lib/config';
 import NextAuth, { type AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { IException } from '@/actions/interface/error';
+import { JWT } from 'next-auth/jwt';
+
+async function refreshToken(token: JWT): Promise<JWT> {
+  const res = await fetch(`${SERVER}/auth/refresh`, {
+    method: 'post',
+    headers: {
+      Authorization: `Refresh ${token.backendToken.refresh_token}`,
+    },
+  });
+
+  const response = await res.json();
+  // console.log(response);
+
+  return {
+    ...token,
+    ...response,
+  };
+}
+
 export const authOptions: AuthOptions = {
   secret: AUTH_SECRET,
   pages: {
@@ -33,10 +52,25 @@ export const authOptions: AuthOptions = {
           const { message } = data as IException;
           throw new Error(message); // 다른건 설정 힘든듯?
         }
-        return data;
+        // console.log(data);
+        return data; // user + ~ 옵션
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      // console.log(token);
+      if (user) return { ...token, ...user };
+      if (token.backendToken.expiresIn > Date.now()) return token;
+      return await refreshToken(token);
+    },
+    session({ token, session }) {
+      session.user = token.user;
+      session.backendToken = token.backendToken;
+
+      return session;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);

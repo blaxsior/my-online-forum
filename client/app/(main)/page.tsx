@@ -1,6 +1,4 @@
 'use client';
-
-import 'react-quill/dist/quill.snow.css';
 import ChannelSection, {
   ChannelSectionProps,
 } from './components/channel/channel-section';

@@ -15,6 +15,5 @@ export async function signinAction(
       'Content-Type': 'application/json',
     },
   });
-  console.log(response.ok);
   return await response.json();
 }
